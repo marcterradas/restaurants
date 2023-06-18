@@ -14,14 +14,12 @@ export function getDiscounts(
       "utf8",
       (error: NodeJS.ErrnoException | null, data: string) => {
         if (error) {
-          //   console.error("Error reading file:", error);
           reject(false);
         }
         try {
           const discounts: Discount[] = JSON.parse(data);
           resolve(discounts);
         } catch (error: NodeJS.ErrnoException) {
-          //   console.error("Error parsing JSON:", error);
           reject(false);
         }
       }
