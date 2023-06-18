@@ -22,7 +22,7 @@ test("test order handler", () => {
   expect(total).toBe(16);
 });
 
-test("add throws error for invalid number", () => {
+test("add throws error for invalid product number", () => {
   const orderHandler: OrderHandler = new MyOrderHandler(products, discounts);
   let errorMessage: string = "";
   try {

@@ -7,6 +7,10 @@ export class MyOrderHandler implements OrderHandler {
   discounts: Discount[];
   products: Record<number, Product>;
 
+  /**
+   * @param {Product[]} products
+   * @param {Discount[]} discounts
+   */
   constructor(products: Product[], discounts: Discount[]) {
     this.discounts = discounts;
     this.products = generateProductsHashMap(products);
@@ -18,9 +22,11 @@ export class MyOrderHandler implements OrderHandler {
    * @param quantity
    */
   add(number: number, quantity: number): void {
+    // if product does not exist, throw error
     if (typeof this.products[number] === "undefined") {
       throw new Error(`product ${number} does not exist`);
     }
+    // if product is the first time that appears in the order, set quantity to 0
     if (typeof this.orderProductQuantity[number] === "undefined") {
       this.orderProductQuantity[number] = 0;
     }
@@ -56,6 +62,7 @@ function generateProductsHashMap(products: Product[]): Record<number, Product> {
   const productsHashMap: Record<number, Product> = {};
 
   for (const product of products) {
+    // product number is the key and the product is the value
     productsHashMap[product.number] = product;
   }
 
