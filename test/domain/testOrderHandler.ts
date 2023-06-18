@@ -30,6 +30,16 @@ test("add throws error for invalid product number", () => {
   } catch (error) {
     errorMessage = error.message;
   }
-  console.error(errorMessage);
   expect(errorMessage).toBe("product 1 does not exist");
+});
+
+test("add throws error for invalid quantity", () => {
+  const orderHandler: OrderHandler = new MyOrderHandler(products, discounts);
+  let errorMessage: string = "";
+  try {
+    orderHandler.add(12, 0);
+  } catch (error) {
+    errorMessage = error.message;
+  }
+  expect(errorMessage).toBe("quantity must be bigger than 0");
 });

@@ -26,6 +26,9 @@ export class MyOrderHandler implements OrderHandler {
     if (typeof this.products[number] === "undefined") {
       throw new Error(`product ${number} does not exist`);
     }
+    if (quantity < 1) {
+      throw new Error(`quantity must be bigger than 0`);
+    }
     // if product is the first time that appears in the order, set quantity to 0
     if (typeof this.orderProductQuantity[number] === "undefined") {
       this.orderProductQuantity[number] = 0;
