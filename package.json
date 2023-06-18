@@ -1,0 +1,11 @@
+{
+    "name": "restaurants",
+    "version": "1.0.0",
+    "engines": {
+        "node": ">=18.16.0"
+    },
+  "type": "module",
+	"devDependencies": {
+		"typescript": "^5.1.3"
+	}
+}
