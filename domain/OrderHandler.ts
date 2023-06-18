@@ -5,11 +5,11 @@ import { Product } from "../interfaces/Product";
 export class MyOrderHandler implements OrderHandler {
   orderProductQuantity: Record<number, number> = {};
   discounts: Discount[];
-  products: Product[];
+  products: Record<number, Product>;
 
   constructor(products: Product[], discounts: Discount[]) {
-    this.products = products;
     this.discounts = discounts;
+    this.products = generateProductsHashMap(products);
   }
 
   /**
@@ -18,6 +18,9 @@ export class MyOrderHandler implements OrderHandler {
    * @param quantity
    */
   add(number: number, quantity: number): void {
+    if (typeof this.products[number] === "undefined") {
+      throw new Error(`product ${number} does not exist`);
+    }
     if (typeof this.orderProductQuantity[number] === "undefined") {
       this.orderProductQuantity[number] = 0;
     }
@@ -29,19 +32,15 @@ export class MyOrderHandler implements OrderHandler {
    * @returns {number} total
    */
   getTotal(): number {
-    const productsHashMap: Record<number, Product> = generateProductsHashMap(
-      this.products
-    );
-
     let total: number = calculateTotalPriceWithoutDiscounts(
       this.orderProductQuantity,
-      productsHashMap
+      this.products
     );
 
     total = calculateTotalWithDiscounts(
       this.discounts,
       this.orderProductQuantity,
-      productsHashMap,
+      this.products,
       total
     );
 
@@ -79,8 +78,6 @@ function calculateTotalPriceWithoutDiscounts(
   for (let productNumber in orderProductQuantity) {
     const quantity: number = orderProductQuantity[productNumber];
     const product: Product = productsHashMap[productNumber];
-    if (!product)
-      throw new Error(`product with code ${productNumber} does not exist`);
     total += product.price * quantity;
   }
 
