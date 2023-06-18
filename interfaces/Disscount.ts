@@ -1,4 +1,4 @@
-interface Discount {
+export interface Discount {
   type: string;
   itemNumber?: number;
   threshold?: number;
