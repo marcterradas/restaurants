@@ -5,6 +5,10 @@ export default defineConfig({
   test: {
     globals: true,
     // detect all files inside test folder (add tsx and ts files if the project growth)
-    include: ["**/test/*.{js,tsx,ts}"],
+    include: [
+      "**/test/infrastructure/*.{js,tsx,ts}",
+      "**/test/application/*.{js,tsx,ts}",
+      "**/test/domain/*.{js,tsx,ts}",
+    ],
   },
 });
