@@ -10,3 +10,9 @@ test("get products", async () => {
     { number: 37, name: "Chicken with almond sauce", price: 6.5 },
   ]);
 });
+
+test("products invalid path", async () => {
+  await getProducts("random url").catch((error) => {
+    expect(error).toBe(false);
+  });
+});
