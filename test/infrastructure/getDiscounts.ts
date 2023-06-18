@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
-import { getDiscounts } from "../infrastructure/getDiscounts";
-import { Discount } from "../interfaces/Discount";
+import { getDiscounts } from "../../infrastructure/getDiscounts";
+import { Discount } from "../../interfaces/Discount";
 
 test("get discounts", async () => {
   const discounts: false | Discount[] = await getDiscounts();
