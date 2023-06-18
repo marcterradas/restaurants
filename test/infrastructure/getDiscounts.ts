@@ -10,3 +10,9 @@ test("get discounts", async () => {
     { type: "menu-pack", items: [12, 21, 37], fixedPrice: 14 },
   ]);
 });
+
+test("discounts invalid path", async () => {
+  await getDiscounts("random url").catch((error) => {
+    expect(error).toBe(false);
+  });
+});
