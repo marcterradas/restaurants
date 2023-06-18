@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
-import { getProducts } from "../infrastructure/getProducts";
-import { Product } from "../interfaces/Product";
+import { getProducts } from "../../infrastructure/getProducts";
+import { Product } from "../../interfaces/Product";
 
 test("get products", async () => {
   const products: false | Product[] = await getProducts();
