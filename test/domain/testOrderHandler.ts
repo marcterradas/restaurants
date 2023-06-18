@@ -8,16 +8,28 @@ const products = [
   { number: 37, name: "Chicken with almond sauce", price: 6.5 },
 ];
 
-const disscounts = [
+const discounts = [
   { type: "2-for-1", itemNumber: 12 },
   { type: "spend-X-to-save-Y", threshold: 20, discountAmount: 5 },
   { type: "menu-pack", items: [12, 21, 37], fixedPrice: 14 },
 ];
 
 test("test order handler", () => {
-  const orderHandler: OrderHandler = new MyOrderHandler(products, disscounts);
+  const orderHandler: OrderHandler = new MyOrderHandler(products, discounts);
   orderHandler.add(12, 4);
   orderHandler.add(21, 2);
   const total = orderHandler.getTotal();
   expect(total).toBe(16);
+});
+
+test("add throws error for invalid number", () => {
+  const orderHandler: OrderHandler = new MyOrderHandler(products, discounts);
+  let errorMessage: string = "";
+  try {
+    orderHandler.add(1, 1);
+  } catch (error) {
+    errorMessage = error.message;
+  }
+  console.error(errorMessage);
+  expect(errorMessage).toBe("product 1 does not exist");
 });
